@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расчет Оклада</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>РАСЧЕТ ОКЛАДА ЗА МЕСЯЦ</h1>
+    <div class="container">
+        <label for="days">Введите количество рабочих дней в месяце:</label>
+        <input type="number" id="days">
+        
+        <label for="my_work_days">Количество отработанных обычных смен:</label>
+        <input type="number" id="my_work_days">
+        
+        <label for="high_work_days">Количество дополнительных смен:</label>
+        <input type="number" id="high_work_days">
+        
+        <button onclick="calculateSalary()">Рассчитать</button>
+        
+        <p id="salaryResult"></p>
+    </div>
+
+    <h1>РАСЧЕТ БОНУСНОЙ ЧАСТИ</h1>
+    <div class="container">
+        <label for="basic_lesson">Количество всех прошедших уроков:</label>
+        <input type="number" id="basic_lesson">
+        
+        <label for="medium_lesson">Количество прошедших уроков по коэффициенту 1.5:</label>
+        <input type="number" id="medium_lesson">
+        
+        <label for="high_lesson">Количество прошедших уроков по коэффициенту 2:</label>
+        <input type="number" id="high_lesson">
+        
+        <button onclick="calculateBonus()">Рассчитать бонус</button>
+        
+        <p id="bonusResult"></p>
+        <p id="totalIncome"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
