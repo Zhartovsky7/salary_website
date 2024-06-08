@@ -5,17 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Расчет Оклада</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css">
 </head>
 <body>
+    <div class="logo-container">
+        <img src="logo.png" alt="Urban University Logo">
+    </div>
     <h1>РАСЧЕТ ОКЛАДА ЗА МЕСЯЦ</h1>
     <div class="container">
-        <label for="days">Введите количество рабочих дней в месяце:</label>
+        <label for="days">Количество рабочих дней в месяце:</label>
         <input type="number" id="days">
         
-        <label for="my_work_days">Количество отработанных обычных смен:</label>
+        <label for="my_work_days">Количество всех отработанных смен:</label>
         <input type="number" id="my_work_days">
         
-        <label for="high_work_days">Количество дополнительных смен:</label>
+        <label for="high_work_days">Из них дополнительных смен:</label>
         <input type="number" id="high_work_days">
         
         <button onclick="calculateSalary()">Рассчитать</button>
@@ -34,12 +38,78 @@
         <label for="high_lesson">Количество прошедших уроков по коэффициенту 2:</label>
         <input type="number" id="high_lesson">
         
-        <button onclick="calculateBonus()">Рассчитать бонус</button>
+        <button onclick="calculateBonus()">Рассчитать</button>
         
         <p id="bonusResult"></p>
         <p id="totalIncome"></p>
     </div>
 
-    <script src="script.js"></script>
+    <div id="calendar-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales/ru.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar-container');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                locale: 'ru', // Устанавливаем русский язык
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,dayGridWeek'
+                },
+                firstDay: 1,  // Начинаем неделю с понедельника
+                dayCellClassNames: function(arg) {
+                    if (arg.date.getDay() === 0 || arg.date.getDay() === 6) {
+                        return ['weekend'];
+                    }
+                    return [];
+                }
+            });
+            calendar.render();
+        });
+
+        function calculateSalary() {
+            const days = parseInt(document.getElementById('days').value);
+            const myWorkDays = parseInt(document.getElementById('my_work_days').value);
+            const highWorkDays = parseInt(document.getElementById('high_work_days').value);
+            
+            const oklad = 40000 / days;
+            const salary = Math.round((myWorkDays * oklad) + (highWorkDays * oklad), 1);
+
+            document.getElementById('salaryResult').innerText = `
+                Стоимость обычного дня: ${oklad.toFixed(1)} рублей
+                Оклад за месяц: ${salary.toFixed(1)} рублей
+            `;
+        }
+
+        function calculateBonus() {
+            const basicLesson = parseInt(document.getElementById('basic_lesson').value);
+            const mediumLesson = parseInt(document.getElementById('medium_lesson').value);
+            const highLesson = parseInt(document.getElementById('high_lesson').value);
+
+            const lesson = 250;
+            const mediumCoefficient = 1.5;
+            const highCoefficient = 2;
+            let bonus = basicLesson * lesson;
+
+            if (mediumLesson > 0 || highLesson > 0) {
+                bonus += highLesson * lesson;
+                bonus += mediumLesson * (lesson * mediumCoefficient - lesson);
+            }
+
+            const salaryText = document.getElementById('salaryResult').innerText;
+            const salaryMatch = salaryText.match(/Оклад за месяц: ([\d.]+) рублей/);
+            let salary = 0;
+
+            if (salaryMatch) {
+                salary = parseFloat(salaryMatch[1]);
+            }
+
+            document.getElementById('bonusResult').innerText = `Бонус за месяц: ${bonus.toFixed(1)} рублей`;
+            document.getElementById('totalIncome').innerText = `Итоговый доход за месяц: ${(salary + bonus).toFixed(1)} рублей`;
+        }
+    </script>
 </body>
 </html>
