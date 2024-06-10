@@ -75,8 +75,14 @@ p {
     height: auto;
 }
 
-#calendar-container {
-    width: 90%;
-    margin: 20px auto;
-    border-radius: 20px; /* Закругление углов на 20px */
+calendar-container {
+    margin-top: 50px; /* Добавлено отступ сверху */
+    width: 100%; /* Устанавливаем ширину */
+    max-width: 600px; /* Ограничиваем максимальную ширину */
+    align-self: center; /* Центрируем по горизонтали */
+}
+
+.fc-daygrid-day.fc-day-sun, .fc-daygrid-day.fc-day-sat {
+    background-color: #000; /* Черный цвет для выходных */
+    color: white; /* Белый цвет текста для лучшей видимости */
 }
