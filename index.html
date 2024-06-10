@@ -6,8 +6,9 @@
     <title>Расчет Оклада</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="favicon.png" type="image/png"> <!-- Ссылка на фавикон -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/main.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/main.min.js"></script>
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales/ru.min.js'></script>
 </head>
 <body>
     <div class="logo-container">
@@ -46,7 +47,7 @@
         <p id="totalIncome"></p>
     </div>
 
-    <div id="calendar-container"></div> <!-- Календарь добавлен сюда -->
+    <div id="calendar-container"></div>
 
     <script>
         function calculateSalary() {
@@ -112,12 +113,11 @@
                     const daysOfWeek = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
                     return { html: daysOfWeek[day] };
                 },
-                dayCellDidMount: function(info) {
-                    const day = info.date.getDay();
+                dayCellContent: function(arg) {
+                    const day = arg.date.getDay();
                     if (day === 0 || day === 6) {
-                        info.el.style.backgroundColor = 'black';
-                        info.el.style.color = 'white';
-                        info.el.style.borderRadius = '20px'; // Закругление углов ячеек
+                        arg.el.style.backgroundColor = 'black';
+                        arg.el.style.color = 'white';
                     }
                 }
             });
@@ -126,3 +126,4 @@
     </script>
 </body>
 </html>
+
