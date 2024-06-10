@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Расчет Оклада</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Ссылка на фавикон -->
 </head>
 <body>
     <div class="logo-container">
@@ -46,30 +46,7 @@
 
     <div id="calendar-container"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales/ru.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar-container');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                locale: 'ru', // Устанавливаем русский язык
-                initialView: 'dayGridMonth',
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,dayGridWeek'
-                },
-                firstDay: 1,  // Начинаем неделю с понедельника
-                dayCellClassNames: function(arg) {
-                    if (arg.date.getDay() === 0 || arg.date.getDay() === 6) {
-                        return ['weekend'];
-                    }
-                    return [];
-                }
-            });
-            calendar.render();
-        });
-
         function calculateSalary() {
             const days = parseInt(document.getElementById('days').value);
             const myWorkDays = parseInt(document.getElementById('my_work_days').value);
@@ -110,6 +87,39 @@
             document.getElementById('bonusResult').innerText = `Бонус за месяц: ${bonus.toFixed(1)} рублей`;
             document.getElementById('totalIncome').innerText = `Итоговый доход за месяц: ${(salary + bonus).toFixed(1)} рублей`;
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendarEl = document.getElementById('calendar-container');
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                firstDay: 1, // Неделя начинается с понедельника
+                locale: 'ru', // Устанавливаем русский язык
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,dayGridWeek,dayGridDay'
+                },
+                buttonText: {
+                    today: 'Сегодня',
+                    month: 'Месяц',
+                    week: 'Неделя',
+                    day: 'День'
+                },
+                dayHeaderContent: function(arg) {
+                    const day = arg.date.getDay();
+                    const daysOfWeek = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+                    return { html: daysOfWeek[day] };
+                },
+                dayCellContent: function(arg) {
+                    const day = arg.date.getDay();
+                    if (day === 0 || day === 6) {
+                        arg.el.style.backgroundColor = 'black';
+                        arg.el.style.color = 'white';
+                    }
+                }
+            });
+            calendar.render();
+        });
     </script>
 </body>
 </html>
