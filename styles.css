@@ -14,7 +14,6 @@ body {
 
 h1 {
     color: white;
-    text-align: center;
 }
 
 .container {
@@ -24,8 +23,7 @@ h1 {
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     color: black;
-    width: 100%;
-    max-width: 800px;
+    width: 800px; /* Уменьшили ширину */
     text-align: center;
 }
 
@@ -36,13 +34,12 @@ label {
 }
 
 input {
-    width: 100%;
-    max-width: 90%;
+    width: 90%;
     padding: 8px;
     margin: 5px 0 10px;
     border-radius: 10px;
     border: 1px solid #ccc;
-    text-align: center;
+    text-align: center; /* Центрируем текст внутри поля ввода */
 }
 
 button {
@@ -50,7 +47,7 @@ button {
     background: #673be6;
     color: white;
     border: none;
-    border-radius: 20px;
+    border-radius: 20px; /* Закругление углов на 20px */
     cursor: pointer;
     font-family: 'Manrope', Arial, sans-serif;
     font-size: 1.2em;
@@ -79,59 +76,7 @@ p {
 }
 
 #calendar-container {
-    margin-top: 50px;
     width: 90%;
-    max-width: 600px;
-    align-self: center;
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.fc-toolbar.fc-header-toolbar {
-    border-radius: 20px;
-}
-
-.fc-daygrid-day.fc-day-sun, .fc-daygrid-day.fc-day-sat {
-    background-color: #000;
-    color: white;
-}
-
-.fc .fc-toolbar-title {
-    border-radius: 20px;
-}
-
-/* Media Queries for responsive design */
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
-    .container {
-        width: 100%;
-        padding: 15px;
-    }
-
-    input {
-        max-width: 100%;
-    }
-
-    button {
-        font-size: 1em;
-    }
-
-    .logo-container {
-        position: static;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    #calendar-container {
-        width: 100%;
-        margin-top: 30px;
-    }
-}
-
-.fc-daygrid-day.fc-day-sun, .fc-daygrid-day.fc-day-sat {
-    background-color: #000; /* Черный цвет для выходных */
-    color: white; /* Белый цвет текста для лучшей видимости */
+    margin: 20px auto;
+    border-radius: 20px; /* Закругление углов на 20px */
 }
