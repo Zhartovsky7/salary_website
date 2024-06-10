@@ -79,6 +79,9 @@ p {
     width: 90%;
     margin: 20px auto;
     border-radius: 20px; /* Закругление углов на 20px */
-    background: white; /* Задний фон календаря */
-    padding: 20px; /* Добавляем отступы для календаря */
+    background-color: white;
+    color: black;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
